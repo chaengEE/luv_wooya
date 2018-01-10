@@ -1,8 +1,81 @@
-body {
+/* COMMON */
+body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
 	margin: 0;
 	padding: 0;
-	font-family: sans-serif;
-	background-image: url(./img/a.jpg);
+}
+
+body, input, textarea, select, button, table, h1, h2, h3, h4, h5 {
+	font-family: HelveticaNeue-Light,AppleSDGothicNeo-Light,sans-serif;
+	font-size: 15px;
+	line-height: 1.267em;
+}
+
+body {
+	position: relative;
+	background-color: #fff;
+	color: #000;
+	word-break: break-all;
+	-webkit-text-size-adjust: none;
+}
+
+html {
+	font-size: 10px;
+	line-height: 15px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+img, fieldset {
+	border: 0;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+em, address {
+	font-style: normal;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+img {
+	vertical-align: top;
+}
+
+mark {
+	color: inherit;
+	font-weight: bold;
+	background: none;
+}
+
+input, button {
+	border-radius: 0;
+	background: none;
+}
+
+/* COMMON HIDE */
+.blind {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+}
+
+.blind::before {
+	display: block;
+	width: 0;
+	height: 0;
+	content: '\00a0';
+	font-size: 0;
 }
 
 .App {
@@ -10,7 +83,7 @@ body {
 }
 
 .App-logo {
-	animation: App-logo-spin infinite 20s linear;
+	animation: App-logo-spin infinite 2s linear;
 	height: 80px;
 }
 
@@ -22,7 +95,7 @@ body {
 }
 
 .App-title {
-	font-size: 1.5em;
+	font-size: 2em;
 }
 
 .App-intro {
@@ -30,12 +103,170 @@ body {
 }
 
 @keyframes App-logo-spin {
-	from {
+	0% {
 		transform: rotate(0deg);
 	}
-	to {
-		transform: rotate(360deg);
+	50% {
+		transform: rotate(15deg);
 	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+.btn_area {
+	overflow: hidden;
+	padding: 10px 0;
+}
+
+.btn_area .btn_write {
+	float: right;
+	padding: 0 10px;
+	font-weight: bold;
+	font-size: 1.6rem;
+	line-height: 40px;
+	color: #fff;
+	background-color: #666;
+	border-radius: 10px;
+}
+
+.tab_list {
+	display: flex;
+}
+
+.tab_list .tab {
+	font-size: 1.8rem;
+	line-height: 50px;
+	text-align: center;
+	background-color: #666;
+	color: #fff;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	flex: 1;
+}
+
+.tab_list .tab[area-selected="true"] {
+	color: #333;
+	font-weight: bold;
+	background-color: #e4e7e9;
+}
+
+.card_list {
+	padding: 25px 5px;
+	font-size: 0;
+	background-color: #e4e7e9;
+}
+
+.card {
+	display: inline-block;
+	width: 25%;
+	padding: 5px;
+	box-sizing: border-box;
+	vertical-align: top;
+}
+
+.card a {
+	display: block;
+	overflow: hidden;
+	border-radius: 10px;
+	background-color: #cacaca;
+}
+
+.card .thumb {
+	overflow: hidden;
+	position: relative;
+	height: 220px;
+}
+
+.card .thumb img {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transform: translateY(-50%);
+}
+
+.card .thumb_info {
+	overflow: hidden;
+	padding: 0 10px;
+	font-size: 1.6rem;
+	line-height: 2rem;
+}
+
+.card .info_title {
+	display: -webkit-box;
+	overflow: hidden;
+	height: 4rem;
+	margin: 3px 0;
+	color: #333;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.card .info_author {
+	display: block;
+	overflow: hidden;
+	margin: 3px 0 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: bold;
+}
+
+.card_write_box .btn_add_tab {
+	float: right;
+	padding: 0 10px;
+	font-weight: bold;
+	font-size: 1.6rem;
+	line-height: 26px;
+	background-color: #ccc;
+	border-radius: 10px;
+}
+
+.card_write_box .music_sheet {
+	clear: both;
+	font-size: 0;
+}
+
+.card_write_box .music_record {
+	display: inline-block;
+	font-size: 1.6rem;
+	vertical-align: top;
+}
+
+.card_write_box .music_record + .music_record {
+	margin-left: -1px;
+}
+
+.card_write_box .music_piece {
+	position: relative;
+	height: 40px;
+	border: 1px solid #000;
+	border-width: 0 1px;
+}
+
+.card_write_box .music_piece .line {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background-color: #000;
+}
+
+.card_write_box .music_piece .line.first {
+	top: 0;
+}
+
+.card_write_box .music_piece .line.second {
+	top: 33%;
+}
+
+.card_write_box .music_piece .line.third {
+	bottom: 33%;
+}
+
+.card_write_box .music_piece .line.fourth {
+	bottom: 0;
 }
 
 /*# sourceMappingURL=index.css.map */

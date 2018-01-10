@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+/* COMMON */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table,h1,h2,h3,h4,h5{font-family:HelveticaNeue-Light,AppleSDGothicNeo-Light,sans-serif;font-size:15px;line-height:1.267em}
+body{position:relative;background-color:#fff;color:#000;word-break:break-all;-webkit-text-size-adjust:none}
+html{font-size:10px;line-height:15px}
+table{border-collapse:collapse}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0.1)}
+img{vertical-align:top}
+mark{color:inherit;font-weight:bold;background:none}
+input,button{border-radius:0;background:none}
+/* COMMON HIDE */
+.blind {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+
+	&::before {
+		display: block;
+		width: 0;
+		height: 0;
+		content: '\00a0';
+		font-size: 0;
+	}
+}
