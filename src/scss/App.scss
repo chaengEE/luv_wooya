@@ -1,0 +1,20 @@
+@import "common";
+
+.box {
+	width: 100px;
+	height: 100px;
+	border: solid 1px black;
+	&.blue {
+		background-color: blue;
+	}
+	&:hover {
+		background-color: red;
+	}
+
+	.text {
+		font-size: 20px;
+		text-align: center;
+		color: $color;
+	}
+
+}

@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
-import logo from './img/ukulele.png';
+import styled from 'styled-components';
+//import logo from './img/ukulele.png';
+
+const DottedBox = styled.div`
+    border: dotted 5px black;
+    padding: 10px;
+    font-size: ${(props)=>props.fontSize};
+    ${props => props.underline && `
+        text-decoration: underline;
+    `}
+    &:hover {
+        background-color: green;
+    }
+`;
 
 class App extends Component {
-  render() {
+    render() {
+        const isBlue = false;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">우야</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <div>
+            <DottedBox>HELLO</DottedBox>
+        </div>
     );
-  }
+    }
 }
 
 export default App;
