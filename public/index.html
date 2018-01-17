@@ -10,7 +10,6 @@
 	-->
 	<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-	<link rel="stylesheet" href="%PUBLIC_URL%/index.css">
 	<!--
 	  Notice the use of %PUBLIC_URL% in the tags above.
 	  It will be replaced with the URL of the `public` folder during the build.
@@ -20,13 +19,13 @@
 	  work correctly both with client-side routing and a non-root public URL.
 	  Learn how to configure a non-root public URL by running `npm run build`.
 	-->
-	<title>React App</title>
+	<title>우야</title>
 </head>
 <body>
 <noscript>
 	You need to enable JavaScript to run this app.
 </noscript>
-<div id="root"></div>
+<header id="header"></header>
 <!--
   This HTML file is a template.
   If you open it directly in the browser, you will see an empty page.
@@ -38,162 +37,31 @@
   To create a production bundle, use `npm run build` or `yarn build`.
 -->
 <div class="container">
-	<div class="btn_area"><a href="#" class="btn_write">글쓰기</a></div>
-	<ul class="tab_list" role="tablist">
-		<li class="tab" role="tab" area-selected="true"><a href="#">전체</a></li>
-		<li class="tab" role="tab" area-selected="false"><a href="#">좋아요</a></li>
-	</ul>
-	<ul class="card_list">
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</p>
-					<span class="info_author">나야나1</span>
-				</div>
-			</a>
-		</li>
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십</p>
-					<span class="info_author">일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
-				</div>
-			</a>
-		</li>
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</p>
-					<span class="info_author">나야나3</span>
-				</div>
-			</a>
-		</li>
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</p>
-					<span class="info_author">나야나4</span>
-				</div>
-			</a>
-		</li>
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</p>
-					<span class="info_author">나야나5</span>
-				</div>
-			</a>
-		</li>
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</p>
-					<span class="info_author">나야나6</span>
-				</div>
-			</a>
-		</li>
-		<li class="card">
-			<a href="#">
-				<div class="thumb"><img src="./img/mint.png" width="100%"></div>
-				<div class="thumb_info">
-					<p class="info_title">일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</p>
-					<span class="info_author">나야나7</span>
-				</div>
-			</a>
-		</li>
-	</ul>
+	<div id="tab_area"></div>
+	<div id="card_group">
+		<div id="btn_write_box"></div>
+		<div id="card"></div>
+	</div>
 
 	<!-- 글쓰기 -->
 	<div class="card_write_box">
 		<form>
-			<label for="name">작성자</label>
-			<input type="text" id="name">
-			<label for="title">제목</label>
-			<input type="text" id="title">
+			<div class="author">
+				<label for="name">작성자</label>
+				<input type="text" id="name">
+			</div>
+			<div class="title">
+				<label for="title">제목</label>
+				<input type="text" id="title">
+			</div>
 			<a href="#" class="btn_add_tab">타브 추가</a>
 
-			<div class="music_sheet">
-				<div class="music_record">
-					<label for="code">코드</label>
-					<input type="text" id="code">
-					<div class="music_piece">
-						<div class="line first"></div>
-						<div class="line second"></div>
-						<div class="line third"></div>
-						<div class="line fourth"></div>
-					</div>
-					<label for="lyrics">가사</label>
-					<input type="text" id="lyrics">
-				</div>
-				<div class="music_record">
-					<label for="code">코드</label>
-					<input type="text" id="code">
-					<div class="music_piece">
-						<div class="line first"></div>
-						<div class="line second"></div>
-						<div class="line third"></div>
-						<div class="line fourth"></div>
-					</div>
-					<label for="lyrics">가사</label>
-					<input type="text" id="lyrics">
-				</div>
-				<div class="music_record">
-					<label for="code">코드</label>
-					<input type="text" id="code">
-					<div class="music_piece">
-						<div class="line first"></div>
-						<div class="line second"></div>
-						<div class="line third"></div>
-						<div class="line fourth"></div>
-					</div>
-					<label for="lyrics">가사</label>
-					<input type="text" id="lyrics">
-				</div>
-				<div class="music_record">
-					<label for="code">코드</label>
-					<input type="text" id="code">
-					<div class="music_piece">
-						<div class="line first"></div>
-						<div class="line second"></div>
-						<div class="line third"></div>
-						<div class="line fourth"></div>
-					</div>
-					<label for="lyrics">가사</label>
-					<input type="text" id="lyrics">
-				</div>
-				<div class="music_record">
-					<label for="code">코드</label>
-					<input type="text" id="code">
-					<div class="music_piece">
-						<div class="line first"></div>
-						<div class="line second"></div>
-						<div class="line third"></div>
-						<div class="line fourth"></div>
-					</div>
-					<label for="lyrics">가사</label>
-					<input type="text" id="lyrics">
-				</div>
-				<div class="music_record">
-					<label for="code">코드</label>
-					<input type="text" id="code">
-					<div class="music_piece">
-						<div class="line first"></div>
-						<div class="line second"></div>
-						<div class="line third"></div>
-						<div class="line fourth"></div>
-					</div>
-					<label for="lyrics">가사</label>
-					<input type="text" id="lyrics">
-				</div>
-			</div>
+			<div id="music_sheet"></div>
+
 		</form>
 	</div>
 </div>
+
+<footer id="footer"></footer>
 </body>
 </html>

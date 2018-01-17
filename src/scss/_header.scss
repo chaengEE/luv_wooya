@@ -1,0 +1,34 @@
+.logo_wrap{
+  float: left;
+  height: 100px;
+  padding: 0 30px;
+
+  &::after{
+    content: '';
+    @include middleAlign;
+  }
+}
+.logo {
+  display: inline-block;
+  animation: spin infinite 2s linear;
+  vertical-align: middle;
+
+  @include sprite($ico-ukulele-logo);
+}
+
+.header {
+  background-color: #3f5f7f;
+  height: 100px;
+}
+
+.title {
+  font-size: 30px;
+  line-height: 100px;
+  color: white;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}

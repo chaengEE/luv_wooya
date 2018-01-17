@@ -1,39 +1,40 @@
 @import "reset";
-@import "app";
+@import "sprite";
+@import "common";
+@import "header";
 
 
 .container{
-
 }
 
-.btn_area{
-	overflow: hidden;
-	padding: 10px 0;
-
-	.btn_write{
-		float: right;
-		padding: 0 10px;
-		font-weight: bold;
-		font-size: 1.6rem;
-		line-height: 40px;
-		color: #fff;
-		background-color: #666;
-		border-radius: 10px;
-	}
+.btn_write{
+	float: right;
+	padding: 0 10px;
+	margin: 0 15px;
+	font-weight: bold;
+	font-size: 1.6rem;
+	line-height: 40px;
+	color: #fff;
+	background-color: #666;
+	border-radius: 10px;
 }
 
 .tab_list{
 	display: flex;
 
-	.tab{
-		font-size: 1.8rem;
-		line-height: 50px;
-		text-align: center;
-		background-color: #666;
-		color: #fff;
+	>li{
+		overflow: hidden;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 		flex: 1;
+	}
+	.tab_item{
+		display: block;
+		font-size: 1.8rem;
+		line-height: 50px;
+		text-align: center;
+		color: #fff;
+		background-color: #666;
 
 		&[area-selected="true"]{
 			color: #333;
@@ -43,15 +44,20 @@
 	}
 }
 
-.card_list{
-	padding: 25px 5px;
-	font-size: 0;
+.card_group{
+	padding: 20px 0 15px;
 	background-color: #e4e7e9;
+}
+
+.card_list{
+	clear: both;
+	padding: 15px 5px;
+	font-size: 0;
 }
 
 .card{
 	display: inline-block;
-	width: 25%;
+	width: 33.33%;
 	padding: 5px;
 	box-sizing: border-box;
 	vertical-align: top;
@@ -65,7 +71,7 @@
 	.thumb{
 		overflow: hidden;
 		position: relative;
-		height: 220px;
+		height: 250px;
 
 		img{
 			position: absolute;
@@ -85,76 +91,102 @@
 	}
 
 	.info_title{
-		display: -webkit-box;
-		overflow: hidden;
+		@include ellipsis(2);
+
 		height: 4rem;
 		margin: 3px 0;
 		color: #333;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
 	}
+
 	.info_author{
+		@include ellipsis;
+
 		display: block;
-		overflow: hidden;
 		margin: 3px 0 10px;
-		text-overflow: ellipsis;
-		white-space: nowrap;
 		font-weight: bold;
 	}
 }
 
 //글쓰기
-.card_write_box{
+.btn_add_tab{
+	float: right;
+	padding: 0 10px;
+	font-weight: bold;
+	font-size: 1.6rem;
+	line-height: 26px;
+	background-color: #ccc;
+	border-radius: 10px;
+}
 
-	.btn_add_tab{
-		float: right;
-		padding: 0 10px;
-		font-weight: bold;
-		font-size: 1.6rem;
-		line-height: 26px;
-		background-color: #ccc;
-		border-radius: 10px;
+.music_sheet{
+	position: relative;
+	width: 100%;
+	padding-left: 50px;
+	clear: both;
+	font-size: 0;
+	box-sizing: border-box;
+}
+.music_record{
+	display: inline-block;
+	width: 25%;
+	font-size: 1.6rem;
+	vertical-align: top;
+
+	&+.music_record{
+		margin-left: -1px;
 	}
 
-	.music_sheet{
-		clear: both;
-		font-size: 0;
-	}
-	.music_record{
-		display: inline-block;
-		font-size: 1.6rem;
+	.indicator{
+		position: absolute;
+		left: 0;
+		width: 50px;
+		text-align: center;
 		vertical-align: top;
+		line-height: 30px;
 
-		&+.music_record{
-			margin-left: -1px;
+		&.tab{
+			left: -50px;
+			margin-top: 5px;
 		}
 	}
 
-	.music_piece{
-		position: relative;
-		height: 40px;
-		border: 1px solid #000;
-		border-width: 0 1px;
+	.music_code,.music_lyrics{
+		font-size: 14px;
 
-		.line{
-			position: absolute;
-			left: 0;
-			right: 0;
-			height: 1px;
-			background-color: #000;
+		input{
+			width: 100%;
+			padding: 3px 5px;
+			line-height: 20px;
+			box-sizing: border-box;
+		}
+	}
+}
 
-			&.first{
-				top: 0;
-			}
-			&.second{
-				top: 33%;
-			}
-			&.third{
-				bottom: 33%;
-			}
-			&.fourth{
-				bottom: 0;
-			}
+.music_note{
+	position: relative;
+	height: 40px;
+	margin: 5px 0;
+	border: 1px solid #000;
+	border-width: 0 1px;
+
+	.line{
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background-color: #000;
+
+		&.first{
+			top: 0;
+		}
+		&.second{
+			top: 33%;
+		}
+		&.third{
+			bottom: 33%;
+		}
+		&.fourth{
+			bottom: 0;
 		}
 	}
 }

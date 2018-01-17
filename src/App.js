@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-//import logo from './img/ukulele.png';
 
 const DottedBox = styled.div`
     border: dotted 5px black;

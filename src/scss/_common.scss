@@ -1,1 +1,21 @@
-$color: orange;
+@mixin pseudoContent{
+}
+
+@mixin middleAlign{
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+@mixin ellipsis($num:null){
+	@if($num == null){
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	} @else {
+		display: -webkit-box;
+		overflow: hidden;
+		-webkit-line-clamp: $num;
+		-webkit-box-orient: vertical;
+	}
+}
