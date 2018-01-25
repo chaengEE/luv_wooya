@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import styles from './scss/index.scss';
-import WriteButton from './Buttons';
+import CommonButton from './Buttons';
 import tempImg from './img/mint.png';
 
 const cardData = [
@@ -32,7 +32,7 @@ export class CardGroup extends Component {
     render(){
         return(
             <div className={classNames(styles.card_group)}>
-                <WriteButton />
+                <CommonButton name="btn_write" text="글쓰기" type="button" />
                 <ul className={classNames(styles.card_list)}>
                     {
                         cardData.map((data)=>{

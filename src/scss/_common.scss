@@ -1,4 +1,7 @@
-@mixin pseudoContent{
+@mixin clear{
+	content: '';
+	display: inline-block;
+	clear: both;
 }
 
 @mixin middleAlign{

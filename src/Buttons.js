@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import styles from './scss/index.scss';
 
-class WriteButton extends Component {
-    render() {
-        return (
-            <button type="button" className={classNames(styles.btn_write)}>글쓰기</button>
-        );
-    }
-}
 
-export default WriteButton;
+const ClassBinder = classNames.bind(styles);
+
+export const CommonButton = (props) => {
+    return <button type={props.type} className={ClassBinder(props.name)}>{props.text}</button>;
+};
+
+export default CommonButton;
+

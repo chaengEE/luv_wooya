@@ -25,7 +25,7 @@ export class MusicRecord extends Component {
     render(){
         let codeNum = code+this.props.index;
         let lyricsNum = lyrics+this.props.index;
-        let isShow = this.props.index%4 == 0 ? true : false;
+        let isShow = this.props.index%4 === 0 ? true : false;
 
         return(
             <div className={classNames(styles.music_record)} index={this.props.index}>

@@ -1,0 +1,156 @@
+//글쓰기
+.write_box{
+	padding: 15px 15px 30px;
+	background-color: #f7f7ff;
+	border-radius: 20px;
+
+	.author,.title{
+		margin: 8px 0;
+
+		label{
+			float: left;
+			min-width: 50px;
+			font-size: 14px;
+			line-height: 34px;
+			text-align: center;
+		}
+	}
+
+	.author_area,.title_area{
+		display: block;
+		overflow: hidden;
+		padding: 3px 6px;
+		border: 1px solid #cacaca;
+		background-color: #fff;
+
+		input{
+			width: 100%;
+			line-height: 26px;
+		}
+	}
+
+	.btn_note{
+		float: right;
+		padding: 0 10px;
+		font-size: 16px;
+		line-height: 40px;
+		color: #fff;
+		background-color: #3498db;
+		border-radius: 10px;
+	}
+
+	.music_sheet_group{
+
+	}
+
+	.music_sheet{
+		position: relative;
+		width: 100%;
+		padding: 10px 0 10px 50px;
+		clear: both;
+		font-size: 0;
+		box-sizing: border-box;
+	}
+
+	.music_record{
+		display: inline-block;
+		width: 25%;
+		font-size: 1.6rem;
+		vertical-align: top;
+
+		&+.music_record{
+			margin-left: -1px;
+		}
+
+		.indicator{
+			position: absolute;
+			left: 0;
+			width: 50px;
+			text-align: center;
+			vertical-align: top;
+			line-height: 30px;
+
+			&.tab{
+				left: -50px;
+				margin-top: 5px;
+			}
+		}
+
+		.music_code,.music_lyrics{
+			font-size: 14px;
+
+			input{
+				width: 100%;
+				padding: 3px 5px;
+				line-height: 20px;
+				background-color: #fff;
+				border: 1px solid #cacaca;
+				box-sizing: border-box;
+			}
+		}
+	}
+
+	.music_note{
+		position: relative;
+		height: 40px;
+		margin: 5px 0;
+		background-color: #fff;
+		border: 1px solid #000;
+		border-width: 0 1px;
+
+		.line{
+			position: absolute;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background-color: #000;
+
+			&.first{
+				top: 0;
+			}
+			&.second{
+				top: 33%;
+			}
+			&.third{
+				bottom: 33%;
+			}
+			&.fourth{
+				bottom: 0;
+			}
+		}
+	}
+
+	.button_area{
+		padding: 20px 0 30px;
+		text-align: center;
+
+		button{
+			padding: 0 15px;
+			margin: 0 10px;
+			font-size: 16px;
+			line-height: 40px;
+			color: #363636;
+			border-radius: 10px;
+			background-color: #ffeaa7;
+		}
+
+		.btn_cancel::before{
+			content: '';
+			display: inline-block;
+			margin: 3px 5px 0 0;
+			vertical-align: top;
+			@include sprite($ico-cancel);
+		}
+		.btn_save{
+			background-color: #55efc4;
+
+			&::before{
+				content: '';
+				display: inline-block;
+				margin: 3px 5px 0 0;
+				vertical-align: top;
+				@include sprite($ico-save);
+			}
+		}
+	}
+}

@@ -179,7 +179,7 @@ module.exports = {
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
                         modules: true,
-                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        localIdentName: '[name]__[local]--[hash:base64:5]'
                       },
                     },
                     {
@@ -197,7 +197,6 @@ module.exports = {
                               'Firefox ESR',
                               'not ie < 9', // React doesn't support IE8 anyway
                             ],
-                            flexbox: 'no-2009',
                           }),
                         ],
                       },

@@ -2,7 +2,7 @@
 
 /* COMMON */
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
-body,input,textarea,select,button,table,h1,h2,h3,h4,h5{font-family:HelveticaNeue-Light,AppleSDGothicNeo-Light,sans-serif;font-size:16px;line-height:20px}
+body,input,textarea,select,button,table,h1,h2,h3,h4,h5{font-family:HelveticaNeue-Medium,AppleSDGothicNeo-Medium,sans-serif;font-size:16px;line-height:20px}
 body{position:relative;background-color:#fff;color:#000;word-break:break-all;-webkit-text-size-adjust:none}
 html{font-size:10px;line-height:15px}
 table{border-collapse:collapse}
@@ -12,7 +12,8 @@ em,address{font-style:normal}
 a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0.1)}
 img{vertical-align:top}
 mark{color:inherit;font-weight:bold;background:none}
-input,button{border-radius:0;background:none}
+input,button{border:0;border-radius:0;background:none}
+input:focus,button:focus,button:active{outline:0}
 /* COMMON HIDE */
 .blind {
 	position: absolute;
