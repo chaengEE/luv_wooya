@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import classNames from 'classnames/bind';
-import styles from './scss/index.scss';
-
+import React from 'react';
+import classNames from '../../node_modules/classnames/bind';
+import styles from './../scss/index.scss';
 
 const ClassBinder = classNames.bind(styles);
 

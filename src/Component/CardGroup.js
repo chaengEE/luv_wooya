@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import classNames from 'classnames/bind';
-import styles from './scss/index.scss';
-import CommonButton from './Buttons';
-import tempImg from './img/mint.png';
+import classNames from '../../node_modules/classnames/bind';
+import styles from './../scss/index.scss';
+import tempImg from './../img/mint.png';
 
 const cardData = [
     {
@@ -32,11 +31,11 @@ export class CardGroup extends Component {
     render(){
         return(
             <div className={classNames(styles.card_group)}>
-                <CommonButton name="btn_write" text="글쓰기" type="button" />
+
                 <ul className={classNames(styles.card_list)}>
                     {
-                        cardData.map((data)=>{
-                            return <Card title={data.title} name={data.name} />
+                        cardData.map((data, i)=>{
+                            return <Card key={i} title={data.title} name={data.name} />
                         })
                     }
                 </ul>
@@ -46,16 +45,33 @@ export class CardGroup extends Component {
 }
 
 export class Card extends Component {
+    constructor(){
+        super();
+        this.state = {
+            like : false
+        };
+        this.addLikeCategory = this.addLikeCategory.bind(this);
+    }
+
+    addLikeCategory(){
+        if(this.state.like){
+            this.setState({like: false});
+        }else{
+            this.setState({like: true});
+        }
+    }
+
     render() {
         return (
             <li className={classNames(styles.card)}>
-                <a href="#">
+                <a href="/detail" className={classNames(styles.card_preview)}>
                     <div className={classNames(styles.thumb)}><img src={tempImg} width="100%" alt="임시이미지"/></div>
                     <div className={classNames(styles.thumb_info)}>
                         <p className={classNames(styles.info_title)}>{this.props.title}</p>
                         <span className={classNames(styles.info_author)}>{this.props.name}</span>
                     </div>
                 </a>
+                <a href="#" onClick={this.addLikeCategory} className={classNames(styles.btn_like)}><span className={this.state.like?classNames(styles.ico_like_full):classNames(styles.ico_like)}>좋아요</span></a>
             </li>
         );
     }

@@ -1,6 +1,6 @@
 @mixin clear{
 	content: '';
-	display: inline-block;
+	display: block;
 	clear: both;
 }
 

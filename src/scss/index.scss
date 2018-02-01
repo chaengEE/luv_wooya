@@ -2,18 +2,13 @@
 @import "sprite";
 @import "common";
 @import "header";
+@import "music_sheet";
 @import "write";
-
-.container{
-	min-width: 768px;
-
-	&::after{
-		@include clear;
-	}
-}
+@import "detail";
 
 .tab_list{
 	display: flex;
+	background-color: #fff;
 
 	>li{
 		overflow: hidden;
@@ -47,69 +42,101 @@
 	}
 }
 
-.card_group{
-	padding: 20px 0 15px;
+.contents{
+	min-width: 768px;
 	background-color: #f1f2f6;
 
-	.btn_write{
-		float: right;
+	&::after{
+		@include clear;
+	}
+}
+
+.btn_area {
+	padding: 15px 15px 0;
+	text-align: right;
+
+	.btn_write {
+		display: inline-block;
 		padding: 0 10px;
-		margin: 0 15px;
 		font-size: 16px;
 		line-height: 40px;
 		color: #fff;
 		background-color: #5555af;
 		border-radius: 10px;
+
+		&:hover {
+			background-color: rgba(85, 85, 175, 0.8);
+		}
 	}
 }
 
 .card_list{
 	clear: both;
-	padding: 15px 5px;
+	padding: 15px 5px 30px;
 	font-size: 0;
 }
 
 .card{
 	display: inline-block;
+	position: relative;
 	width: 33.33%;
 	padding: 5px;
 	box-sizing: border-box;
 	vertical-align: top;
 
-	a{
+	.card_preview{
 		display: block;
 		overflow: hidden;
 		border-radius: 10px;
 		background-color: #ced6e0;
 		box-shadow: 0 1px 2px rgba(0,0,0,0.5);
 	}
+
+	.btn_like{
+		position: absolute;
+		top: 188px;
+		right: 10px;
+
+		.ico_like{
+			display: block;
+			@include sprite($ico_like);
+		}
+		.ico_like_full{
+			display: block;
+			@include sprite($ico_like_full);
+			animation: heart-full 0.5s;
+		}
+	}
+
 	.thumb{
 		overflow: hidden;
-		position: relative;
-		height: 250px;
+		height: 220px;
+		background-color: rgba(0,0,0,0.3);
 
 		img{
-			position: absolute;
-			top: 50%;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			transform: translateY(-50%);
+			vertical-align: middle;
+		}
+
+		&::before{
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
 		}
 	}
 
 	.thumb_info{
 		overflow: hidden;
 		padding: 0 10px;
-		font-size: 1.6rem;
-		line-height: 2rem;
+		font-size: 16px;
+		line-height: 20px;
 	}
 
 	.info_title{
 		@include ellipsis(2);
 
-		height: 4rem;
-		margin: 3px 0;
+		height: 40px;
+		margin: 5px 0;
 		color: #57606f;
 	}
 
@@ -117,8 +144,20 @@
 		@include ellipsis;
 
 		display: block;
-		margin: 3px 0 10px;
+		margin: 5px 0 10px;
 		font-weight: bold;
 		color: #2f3542;
+	}
+}
+
+@keyframes heart-full {
+	0%{
+		transform: scale(0.8);
+	}
+	50%{
+		transform: scale(1.2);
+	}
+	100%{
+		transform: scale(1);
 	}
 }

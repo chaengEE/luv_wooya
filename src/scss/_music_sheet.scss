@@ -1,0 +1,80 @@
+.music_sheet_group{
+	padding: 12px 0 10px;
+}
+
+.music_sheet{
+	position: relative;
+	width: 100%;
+	padding: 10px 0 10px 50px;
+	clear: both;
+	font-size: 0;
+	box-sizing: border-box;
+}
+
+.music_record{
+	display: inline-block;
+	width: 25%;
+	font-size: 1.6rem;
+	vertical-align: top;
+
+	&+.music_record{
+		margin-left: -1px;
+	}
+
+	.indicator{
+		position: absolute;
+		left: 0;
+		width: 50px;
+		text-align: center;
+		vertical-align: top;
+		line-height: 30px;
+
+		&.tab{
+			left: -50px;
+			margin-top: 5px;
+		}
+	}
+
+	.music_code,.music_lyrics{
+		font-size: 14px;
+
+		input{
+			width: 100%;
+			padding: 3px 5px;
+			line-height: 20px;
+			background-color: #fff;
+			border: 1px solid #cacaca;
+			box-sizing: border-box;
+		}
+	}
+}
+
+.music_note{
+	position: relative;
+	height: 40px;
+	margin: 5px 0;
+	background-color: #fff;
+	border: 1px solid #000;
+	border-width: 0 1px;
+
+	.line{
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background-color: #000;
+
+		&.first{
+			top: 0;
+		}
+		&.second{
+			top: 33%;
+		}
+		&.third{
+			bottom: 33%;
+		}
+		&.fourth{
+			bottom: 0;
+		}
+	}
+}

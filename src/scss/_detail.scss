@@ -1,0 +1,44 @@
+//상세 페이지
+.detail_view{
+	padding: 15px 15px 20px;
+	background-color: #f7f7ff;
+
+	.title{
+		font-size: 32px;
+		line-height: 40px;
+		color: #222;
+	}
+	.author_info{
+		text-align: right;
+
+		.name{
+			display: block;
+			font-size: 18px;
+			line-height: 20px;
+		}
+		.date{
+			font-size: 14px;
+			line-height: 20px;
+			color: #888;
+		}
+	}
+
+	.button_area{
+		padding: 10px 0 20px;
+		text-align: center;
+
+		.btn_back{
+			padding: 0 15px;
+			margin: 0 10px;
+			font-size: 16px;
+			line-height: 40px;
+			color: #222;
+			border-radius: 10px;
+			background-color: rgba(85,240,200,0.7);
+
+			&:hover {
+				background-color: #55efc4;
+			}
+		}
+	}
+}
