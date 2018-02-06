@@ -1,5 +1,9 @@
 .music_sheet_group{
 	padding: 12px 0 10px;
+
+	&::after{
+		@include clear;
+	}
 }
 
 .music_sheet{
@@ -51,8 +55,8 @@
 
 .music_note{
 	position: relative;
-	height: 40px;
-	margin: 5px 0;
+	height: 42px;
+	margin: 8px 0;
 	background-color: #fff;
 	border: 1px solid #000;
 	border-width: 0 1px;
@@ -61,20 +65,38 @@
 		position: absolute;
 		left: 0;
 		right: 0;
-		height: 1px;
-		background-color: #000;
+		padding: 7px 0;
+
+		&::before{
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background-color: #000;
+		}
 
 		&.first{
-			top: 0;
+			top: -7px;
 		}
 		&.second{
-			top: 33%;
+			top: calc(33% - 7px);
 		}
 		&.third{
-			bottom: 33%;
+			bottom: calc(33% - 7px);
 		}
 		&.fourth{
-			bottom: 0;
+			bottom: -7px;
 		}
+	}
+
+	.point{
+		position:absolute;
+		width:10px;
+		height:10px;
+		background-color: #000;
+		border-radius: 5px;
+		z-index:1;
 	}
 }

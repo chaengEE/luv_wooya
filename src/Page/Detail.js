@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
-import {MusicNote, MusicRecord} from './../Component/MusicSheet';
+import {MusicRecord} from './../Component/MusicSheet';
 
 const testData = {
     'author' : '쿠자',
