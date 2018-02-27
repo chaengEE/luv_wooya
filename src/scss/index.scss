@@ -135,8 +135,10 @@
 		@include ellipsis(2);
 
 		height: 40px;
-		margin: 5px 0;
-		color: #57606f;
+		margin: 10px 0 5px;
+		font-size: 18px;
+		font-weight: bold;
+		color: #2f3542;
 	}
 
 	.info_author{
@@ -144,8 +146,7 @@
 
 		display: block;
 		margin: 5px 0 10px;
-		font-weight: bold;
-		color: #2f3542;
+		color: #57606f;
 	}
 }
 

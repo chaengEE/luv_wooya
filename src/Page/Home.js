@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import firebase from ''
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
 import TabArea from '../Component/TabArea';
@@ -38,10 +37,18 @@ import {CardGroup} from '../Component/CardGroup';
 // .then(function(snapshot){
 //      console.log(snapshot.val());
 // });
-// once는 파이어베이와 연결해서 한 번만 가져오고 연결을 끊는다
+// once는 파이어베이스와 연결해서 한번만 가져오고 연결을 끊어버려서 파이어베이스의 값이 바뀌어도 알 수 없다.
 // once에 'value'는 정해진 키워드이므로 확인 필요
 
+// firebaseApp.database().ref('key/data').on('value', function(snapshot){
+//      console.log(snapshot.val());
+// });
+// 데이터를 가져온 후에도 연결을 끊지 않고 유지한다.
+// 파이어베이스의 값이 바뀌면 코드에 반영해준다.
+// 성능에 영향을 미칠 수 있으니 꼭 필요한 곳에만 사용한다.
+
 class Home extends Component {
+
     render() {
         return (
             <div className={classNames(styles.contents)}>

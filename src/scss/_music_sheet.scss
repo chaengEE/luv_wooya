@@ -13,6 +13,22 @@
 	clear: both;
 	font-size: 0;
 	box-sizing: border-box;
+
+	.btn_remove{
+		position: absolute;
+		top: 50%;
+		left: 15px;
+		transform: translateY(-50%);
+
+		@include sprite($ico_remove);
+	}
+
+	.view_mode &{
+		padding-left: 0;
+		.btn_remove{
+			display: none;
+		}
+	}
 }
 
 .music_record{
@@ -40,12 +56,13 @@
 	}
 
 	.music_code,.music_lyrics{
+		min-height: 20px;
 		font-size: 14px;
+		line-height: 20px;
 
 		input{
 			width: 100%;
 			padding: 3px 5px;
-			line-height: 20px;
 			background-color: #fff;
 			border: 1px solid #cacaca;
 			box-sizing: border-box;
@@ -58,8 +75,8 @@
 	height: 42px;
 	margin: 8px 0;
 	background-color: #fff;
-	border: 1px solid #000;
-	border-width: 0 1px;
+	border: 2px solid #000;
+	border-width: 0 2px;
 
 	.line{
 		position: absolute;
@@ -77,17 +94,43 @@
 			background-color: #000;
 		}
 
+		&::after{
+			content: '';
+			position: absolute;
+		    width: 1px;
+		    height: 42px;
+		    background-color: #000;
+		}
+
 		&.first{
 			top: -7px;
+
+			&::after{
+				top: 7px;
+				left: 25%;
+			}
 		}
 		&.second{
 			top: calc(33% - 7px);
+
+			&::after{
+				top: -7px;
+				left: 50%;
+			}
 		}
 		&.third{
 			bottom: calc(33% - 7px);
+			&::after{
+				bottom: -7px;
+				left: 75%;
+			}
 		}
 		&.fourth{
-			bottom: -7px;
+			bottom: -6px;
+
+			&::after{
+				content: none;
+			}
 		}
 	}
 

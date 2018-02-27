@@ -2,50 +2,42 @@ import React, { Component } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
 import tempImg from './../img/mint.png';
-
-const cardData = [
-    {
-        title : "일이삼사오육칠팔구십",
-        name : "도레미"
-    },
-    {
-        title : "일이삼사오육칠팔구십일이삼사오육칠팔구십",
-        name : "레미"
-    },
-    {
-        title : "일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십",
-        name : "솔라"
-    },
-    {
-        title : "일이삼사오육칠팔구십일이삼사오육칠팔구십",
-        name : "도레미파솔라시도레미파솔라시도"
-    },
-    {
-        title : "일이삼사오육칠팔구십일이삼사오육칠팔구십",
-        name : "도미솔도미솔"
-    },
-    {
-        title : "일이삼사오육",
-        name : "솔솔라라솔솔미"
-    },
-    {
-        title : "일이삼사오육칠팔구십일이삼사오",
-        name : "솔미"
-    }
-];
+import database from '../database';
 
 export class CardGroup extends Component {
+    constructor(){
+        super();
+        this.state = {
+            cardList : []
+        };
+    }
+
+    componentWillMount(){
+        database.ref('music').on('value', (snapshot) => {
+            let newCardList = [];
+
+            snapshot.forEach((data)=>{
+                let key = data.key,
+                    info = data.val().note;
+                newCardList.push(
+                    <Card key={key} 
+                        url={'/detail?'+key} 
+                        title={info.title} 
+                        author={info.author} 
+                    />
+                );
+            });
+
+            this.setState({cardList : newCardList});
+        });
+    }
 
     render(){
         return(
             <div className={classNames(styles.card_group)}>
 
                 <ul className={classNames(styles.card_list)}>
-                    {
-                        cardData.map((data, i)=>{
-                            return <Card key={i} title={data.title} name={data.name} />
-                        })
-                    }
+                    {this.state.cardList}
                 </ul>
             </div>
         );
@@ -53,15 +45,16 @@ export class CardGroup extends Component {
 }
 
 export class Card extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             like : false
         };
-        this.addLikeCategory = this.addLikeCategory.bind(this);
     }
 
-    addLikeCategory(){
+    addLikeCategory = (e) => {
+        e.preventDefault();
+        
         if(this.state.like){
             this.setState({like: false});
         }else{
@@ -72,11 +65,11 @@ export class Card extends Component {
     render() {
         return (
             <li className={classNames(styles.card)}>
-                <a href="/detail" className={classNames(styles.card_preview)}>
+                <a href={this.props.url} className={classNames(styles.card_preview)}>
                     <div className={classNames(styles.thumb)}><img src={tempImg} width="100%" alt="임시이미지"/></div>
                     <div className={classNames(styles.thumb_info)}>
                         <p className={classNames(styles.info_title)}>{this.props.title}</p>
-                        <span className={classNames(styles.info_author)}>{this.props.name}</span>
+                        <span className={classNames(styles.info_author)}>{this.props.author}</span>
                     </div>
                 </a>
                 <a href="#" onClick={this.addLikeCategory} className={classNames(styles.btn_like)}><span className={this.state.like?classNames(styles.ico_like_full):classNames(styles.ico_like)}>좋아요</span></a>

@@ -47,17 +47,31 @@ export class MusicRecord extends Component {
         let isShow = this.props.index%4 === 0 && this.props.isWrite ? true : false;
         let pointList = [], event = this.props.removePoint;
 
-        this.props.recordInfo.points.map(function(data,index){
-            var position = {
-                top: data.top,
-                left: data.left
-            };
-            pointList.push(<MusicNotePoint key={index} index={index} style={position} event={event} />);
-        });
+        if(this.props.points !== undefined){
+            this.props.points.forEach((data,index) => {
+                var position = {
+                    top: data.top,
+                    left: data.left
+                };
+                pointList.push(
+                    <MusicNotePoint key={index} 
+                                    index={index} 
+                                    style={position} 
+                                    event={event} 
+                    />
+                );
+            });
+        }
 
         return(
             <div className={classNames(styles.music_record)} index={this.props.index}>
-                <MusicNoteLabel content={this.props.code} isWrite={this.props.isWrite} isShow={isShow} offset={codeNum} text={'코드'} setLabel={this.props.setLabel} />
+                <MusicNoteLabel isWrite={this.props.isWrite} 
+                                isShow={isShow}
+                                offset={codeNum} 
+                                text={'코드'}
+                                content={this.props.sheetInfo.code} 
+                                setLabel={this.props.setLabel} 
+                />
 
                 <div className={classNames(styles.music_note)}>
                     <div className={this.props.isShow ? classNames(styles.indicator,styles.tab) : classNames(styles.blind)}>TAB</div>
@@ -68,7 +82,13 @@ export class MusicRecord extends Component {
                     {pointList}
                 </div>
 
-                <MusicNoteLabel content={this.props.lyrics} isWrite={this.props.isWrite} isShow={isShow} offset={lyricsNum} text={'가사'} setLabel={this.props.setLabel} />
+                <MusicNoteLabel isWrite={this.props.isWrite}
+                                isShow={isShow}
+                                offset={lyricsNum}
+                                text={'가사'}
+                                content={this.props.sheetInfo.lyrics} 
+                                setLabel={this.props.setLabel} 
+                />
             </div>
         );
     }
@@ -80,12 +100,27 @@ export class MusicSheet extends Component {
     }
 
     render(){
+        let recordList = [];
+        for(var i = 0; i < 4; i++){
+            recordList.push(
+                <MusicRecord key={i} 
+                             index={i}
+                             row={this.props.index}
+                             isWrite={this.props.isWrite} 
+                             code={this.props.code} 
+                             lyrics={this.props.lyrics} 
+                             sheetInfo={this.props.sheetInfo[i]}
+                             points={this.props.sheetInfo[i].points}
+                             setLabel={this.props.setLabel} 
+                             setPoint={this.props.setPoint} 
+                             removePoint={this.props.removePoint} 
+                />
+            );
+        }
         return(
             <div className={classNames(styles.music_sheet)} row-index={this.props.index}>
-                <MusicRecord code={this.props.code} lyrics={this.props.lyrics} isWrite={this.props.isWrite} row={this.props.index} index={0} recordInfo={this.props.sheetInfo[0]} setLabel={this.props.setLabel} setPoint={this.props.setPoint} removePoint={this.props.removePoint} />
-                <MusicRecord code={this.props.code} lyrics={this.props.lyrics} isWrite={this.props.isWrite} row={this.props.index} index={1} recordInfo={this.props.sheetInfo[1]} setLabel={this.props.setLabel} setPoint={this.props.setPoint} removePoint={this.props.removePoint} />
-                <MusicRecord code={this.props.code} lyrics={this.props.lyrics} isWrite={this.props.isWrite} row={this.props.index} index={2} recordInfo={this.props.sheetInfo[2]} setLabel={this.props.setLabel} setPoint={this.props.setPoint} removePoint={this.props.removePoint} />
-                <MusicRecord code={this.props.code} lyrics={this.props.lyrics} isWrite={this.props.isWrite} row={this.props.index} index={3} recordInfo={this.props.sheetInfo[3]} setLabel={this.props.setLabel} setPoint={this.props.setPoint} removePoint={this.props.removePoint} />
+                {recordList}
+                <a href="#" className={classNames(styles.btn_remove)} onClick={this.props.removeRecord}>제거</a>
             </div>
         );
     }

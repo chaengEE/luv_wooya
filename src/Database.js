@@ -1,11 +1,14 @@
-import * as firebase from "firebase";
+import firebase from 'firebase';
 
-// Initialize Firebase
-// TODO: Replace with your project's customized code snippet
-var config = {
-    apiKey: "<API_KEY>",
-    authDomain: "<PROJECT_ID>.firebaseapp.com",
+const firebaseApp = firebase.initializeApp({
+    apiKey: "AIzaSyB0hMpXcorka0JsrggH1OhdmBTtEoaBhP8",
+    authDomain: "luv-wooya.firebaseapp.com",
     databaseURL: "https://luv-wooya.firebaseio.com",
-    storageBucket: "<BUCKET>.appspot.com",
-};
-const firebaseApp = firebase.initializeApp(config);
+    projectId: "luv-wooya",
+    storageBucket: "luv-wooya.appspot.com",
+    messagingSenderId: "373478064493"
+});
+
+const database = firebaseApp.database();
+
+export default database;

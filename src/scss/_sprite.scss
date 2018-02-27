@@ -42,6 +42,17 @@ $ico-like-total-width: 98px;
 $ico-like-total-height: 98px;
 $ico-like-image: '../img/sprite.png';
 $ico-like: (66px, 64px, -66px, -64px, 32px, 32px, 98px, 98px, '../img/sprite.png', 'ico_like', );
+$ico-remove-name: 'ico_remove';
+$ico-remove-x: 64px;
+$ico-remove-y: 34px;
+$ico-remove-offset-x: -64px;
+$ico-remove-offset-y: -34px;
+$ico-remove-width: 20px;
+$ico-remove-height: 20px;
+$ico-remove-total-width: 98px;
+$ico-remove-total-height: 98px;
+$ico-remove-image: '../img/sprite.png';
+$ico-remove: (64px, 34px, -64px, -34px, 20px, 20px, 98px, 98px, '../img/sprite.png', 'ico_remove', );
 $ico-save-name: 'ico_save';
 $ico-save-x: 0px;
 $ico-save-y: 64px;
@@ -67,7 +78,7 @@ $ico-ukulele-logo: (0px, 0px, 0px, 0px, 64px, 64px, 98px, 98px, '../img/sprite.p
 $spritesheet-width: 98px;
 $spritesheet-height: 98px;
 $spritesheet-image: '../img/sprite.png';
-$spritesheet-sprites: ($ico-cancel, $ico-like-full, $ico-like, $ico-save, $ico-ukulele-logo, );
+$spritesheet-sprites: ($ico-cancel, $ico-like-full, $ico-like, $ico-remove, $ico-save, $ico-ukulele-logo, );
 $spritesheet: (98px, 98px, '../img/sprite.png', $spritesheet-sprites, );
 
 // The provided mixins are intended to be used with the array-like variables
