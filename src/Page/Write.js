@@ -7,39 +7,62 @@ import database from '../database';
 class Write extends Component {
     constructor(){
         super();
-        let newSheetInfo = [],
-            newSheetIndex = 1;
+
+        let newSheetIndex = 1,
+            newSheetInfo = [];
         for(var i = 0; i < newSheetIndex; i++){
             newSheetInfo[i] = [
-                    {
-                        code : '',
-                        lyrics : '',
-                        points : []
-                    },
-                    {
-                        code : '',
-                        lyrics : '',
-                        points : []
-                    },
-                    {
-                        code : '',
-                        lyrics : '',
-                        points : []
-                    },
-                    {
-                        code : '',
-                        lyrics : '',
-                        points : []
-                    }
-                ];
+                {
+                    code : '',
+                    lyrics : '',
+                    points : []
+                },
+                {
+                    code : '',
+                    lyrics : '',
+                    points : []
+                },
+                {
+                    code : '',
+                    lyrics : '',
+                    points : []
+                },
+                {
+                    code : '',
+                    lyrics : '',
+                    points : []
+                }
+            ];
         }
-
         this.state = {
+            key: '',
             author : '',
             title : '',
             sheetIndex : newSheetIndex,
             sheetInfo : newSheetInfo
         };
+    }
+
+    componentWillMount(){
+        let noteID = '',
+            newNote = {};
+
+        if(this.props.history.location.search.length > 0){
+            noteID = this.props.history.location.search.substring(1);
+
+            database.ref('music/'+noteID).once('value')
+            .then((snapshot) => {
+                newNote = snapshot.val().note;
+
+                this.setState({
+                    key : noteID,
+                    author : newNote.author,
+                    title : newNote.title,
+                    sheetIndex : newNote.sheetIndex,
+                    sheetInfo : newNote.sheetInfo
+                });
+            });
+        }
     }
 
     addMusicSheet = e => {
@@ -79,20 +102,30 @@ class Write extends Component {
 
     clickWriteCancel = e => {
         e.preventDefault();
-        window.location = '/';
+        this.props.history.push('/');
     }
 
     saveMusic = e => {
         e.preventDefault();
 
-        let newMusic = database.ref('music').push();
+        let today = new Date(),
+            date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' ',
+            hours = today.getHours() > 13 ? 'PM '+(today.getHours()-12) : 'AM '+(today.getHours()),
+            datetime = date+' '+hours+':'+today.getMinutes(),
+            newMusic = null;
 
-        newMusic.set({
-            note : this.state
-        }).then(function(){
-            window.location = '/';
-        });
+        if(this.state.key.length > 0){
+            newMusic = database.ref('music/'+this.state.key);
+        }else{
+            newMusic = database.ref('music').push();
+        }
         
+        newMusic.set({
+            note : this.state,
+            date : datetime
+        }).then(
+            this.props.history.push('/')
+        );
     }
 
     changeAuthor = e => {
@@ -125,14 +158,17 @@ class Write extends Component {
             noteWidth = e.target.parentNode.clientWidth,
             offsetLeft = e.clientX - 70 - (noteWidth*record_index),
             offsetTop = e.target.offsetTop + 2,
-            point_index = this.state.sheetInfo[sheet_index][record_index].points.length,
             sheetInfoList = this.state.sheetInfo;
 
         let position = {
             top: offsetTop+'px',
             left: offsetLeft+'px'
         };
-        sheetInfoList[sheet_index][record_index].points[point_index]=position;
+        
+        if(sheetInfoList[sheet_index][record_index].points === undefined){
+            sheetInfoList[sheet_index][record_index].points = [];
+        }
+        sheetInfoList[sheet_index][record_index].points.push(position);
         this.setState({sheetInfo : sheetInfoList});
     }
 
@@ -165,16 +201,18 @@ class Write extends Component {
 
     render() {
         let totalMusicSheet = [];
-        for(let i = 0; i < this.state.sheetIndex; i++){
+        
+        for(var i = 0; i < this.state.sheetIndex; i++){
             totalMusicSheet.push(
                 <MusicSheet key={i} 
                     index={i} 
                     isWrite={true}
-                    sheetInfo={this.state.sheetInfo[i]} 
+                    sheetInfo={this.state.sheetInfo[i]}
                     setLabel={this.changeNoteLabel} 
                     setPoint={this.addNote} 
                     removePoint={this.removeNote} 
-                    removeRecord={this.removeRecord} />
+                    removeRecord={this.removeRecord}
+                />
             );
         }
 

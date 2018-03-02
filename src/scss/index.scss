@@ -150,6 +150,57 @@
 	}
 }
 
+.dimmed{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.6);
+	z-index: 100;
+}
+
+.popup{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 300px;
+	height: 200px;
+	margin: auto;
+	background-color: #f7f7ff;
+	text-align: center;
+	z-index: 200;
+
+	.message{
+		padding: 50px 15px 35px;
+		font-size: 18px;
+	}
+
+	.btn_confirm,
+	.btn_cancel{
+		padding: 0 15px;
+		margin: 0 5px;
+		font-size: 16px;
+		line-height: 40px;
+		color: #222;
+		border-radius: 10px;
+		background-color: rgba(85,240,50,0.7);
+
+		&:hover {
+			background-color: rgba(85,240,50,0.9);
+		}
+	}
+	.btn_cancel{
+		background-color: rgba(130,130,130,0.7);
+
+		&:hover{
+			background-color: rgba(130,130,130,0.9);
+		}
+	}
+}
+
 @keyframes heart-full {
 	0%{
 		transform: scale(0.8);

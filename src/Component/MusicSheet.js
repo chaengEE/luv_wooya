@@ -23,7 +23,7 @@ export class MusicNoteLabel extends Component{
         if(this.props.isWrite){
             //글쓰기 페이지
             labelBox.push(<label htmlFor={this.props.offset} className={this.props.isShow ? classNames(styles.indicator) : classNames(styles.blind)} key={'k'+this.props.offset}>{this.props.text}</label>);
-            labelBox.push(<input className={classNames(styles.code)} type="text" id={this.props.offset} key={this.props.offset} onChange={this.props.setLabel} />);
+            labelBox.push(<input className={classNames(styles.code)} type="text" id={this.props.offset} value={this.props.content} key={this.props.offset} onChange={this.props.setLabel} />);
         }else{
             labelBox.push(this.props.content);
         }
@@ -47,8 +47,8 @@ export class MusicRecord extends Component {
         let isShow = this.props.index%4 === 0 && this.props.isWrite ? true : false;
         let pointList = [], event = this.props.removePoint;
 
-        if(this.props.points !== undefined){
-            this.props.points.forEach((data,index) => {
+        if(this.props.sheetInfo.points !== undefined){
+            this.props.sheetInfo.points.forEach((data,index) => {
                 var position = {
                     top: data.top,
                     left: data.left
@@ -110,7 +110,6 @@ export class MusicSheet extends Component {
                              code={this.props.code} 
                              lyrics={this.props.lyrics} 
                              sheetInfo={this.props.sheetInfo[i]}
-                             points={this.props.sheetInfo[i].points}
                              setLabel={this.props.setLabel} 
                              setPoint={this.props.setPoint} 
                              removePoint={this.props.removePoint} 
@@ -120,7 +119,12 @@ export class MusicSheet extends Component {
         return(
             <div className={classNames(styles.music_sheet)} row-index={this.props.index}>
                 {recordList}
-                <a href="#" className={classNames(styles.btn_remove)} onClick={this.props.removeRecord}>제거</a>
+                {
+                    this.props.index > 0 
+                    ? <a href="#" className={classNames(styles.btn_remove)} 
+                                onClick={this.props.removeRecord}>제거</a>
+                    : ''
+                }
             </div>
         );
     }

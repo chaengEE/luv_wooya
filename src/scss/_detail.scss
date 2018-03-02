@@ -25,19 +25,38 @@
 
 	.button_area{
 		padding: 10px 0 20px;
-		text-align: center;
+		margin: 0 -5px;
 
-		.btn_back{
+		.btn_back,
+		.btn_edit,
+		.btn_delete{
 			padding: 0 15px;
-			margin: 0 10px;
+			margin: 0 5px;
 			font-size: 16px;
 			line-height: 40px;
-			color: #222;
+			color: #333;
 			border-radius: 10px;
-			background-color: rgba(85,240,200,0.7);
+			background-color: rgba(85,240,50,0.7);
 
 			&:hover {
-				background-color: #55efc4;
+				background-color: rgba(85,240,50,0.9);
+			}
+		}
+
+		.btn_edit{
+			float: right;
+			background-color: rgba(255,190,5,0.7);
+
+			&:hover{
+				background-color: rgba(255,190,5,0.9);
+			}
+		}
+
+		.btn_delete{
+			float: right;
+			background-color: rgba(255,100,80,0.7);
+			&:hover{
+				background-color: rgba(255,100,80,0.9);
 			}
 		}
 	}

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
 import TabArea from '../Component/TabArea';
-import {CardGroup} from '../Component/CardGroup';
+import Card from '../Component/Card';
+import database from '../database';
 
 // const firebaseApp = firebase.initializeApp({
 //     apiKey:
@@ -48,6 +49,32 @@ import {CardGroup} from '../Component/CardGroup';
 // 성능에 영향을 미칠 수 있으니 꼭 필요한 곳에만 사용한다.
 
 class Home extends Component {
+    constructor(){
+        super();
+        this.state = {
+            cardList : []
+        };
+    }
+
+    componentWillMount(){
+        database.ref('music').on('value', (snapshot) => {
+            let newCardList = [];
+
+            snapshot.forEach((data)=>{
+                let key = data.key,
+                    info = data.val().note;
+                newCardList.push(
+                    <Card key={key} 
+                        url={'/detail?'+key} 
+                        title={info.title} 
+                        author={info.author} 
+                    />
+                );
+            });
+
+            this.setState({cardList : newCardList});
+        });
+    }
 
     render() {
         return (
@@ -56,7 +83,11 @@ class Home extends Component {
                 <div className={classNames(styles.btn_area)}>
                     <a href="/write" className={classNames(styles.btn_write)} role="button">글쓰기</a>
                 </div>
-                <CardGroup />
+                <div className={classNames(styles.card_group)}>
+                    <ul className={classNames(styles.card_list)}>
+                        {this.state.cardList}
+                    </ul>
+                </div>
             </div>
         );
     }
