@@ -1,6 +1,8 @@
 .header {
-  background-color: #3f5f7f;
+  position: relative;
   height: 100px;
+  background-color: #3f5f7f;
+  z-index: 100;
 
   .title {
     font-size: 30px;

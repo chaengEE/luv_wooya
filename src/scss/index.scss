@@ -8,7 +8,9 @@
 
 .tab_list{
 	display: flex;
+	position: relative;
 	background-color: #fff;
+	z-index: 10;
 
 	>li{
 		overflow: hidden;
@@ -51,20 +53,77 @@
 }
 
 .btn_area {
-	padding: 15px 15px 0;
+	padding: 15px 5px 0;
 	text-align: right;
 
-	.btn_write {
+	.btn_search,.btn_write {
 		display: inline-block;
 		padding: 0 10px;
+		margin-right: 5px;
 		font-size: 16px;
 		line-height: 40px;
 		color: #fff;
-		background-color: #5555af;
+		background-color: #91969c;
 		border-radius: 10px;
 
 		&:hover {
-			background-color: rgba(85, 85, 175, 0.8);
+			background-color: rgba(145, 150, 155, 0.8);
+		}
+	}
+
+	.btn_search::before{
+		content: '';
+		display: inline-block;
+		margin: 4px 4px 0 0;
+		@include sprite($ico_search);
+		vertical-align: top;
+	}
+
+	.btn_write::before{
+		content: '';
+		display: inline-block;
+		margin: 4px 4px 0 0;
+		@include sprite($ico_note);
+		vertical-align: top;
+	}
+}
+
+.searchbar{
+	height: 0;
+	overflow: hidden;
+	transform: translateY(-100%);
+	transition: all ease-in 0.3s;
+
+	&.isShow{
+		height: 46px;
+		transform: translateY(0);
+	}
+
+	.search_data{
+		display: block;
+		overflow: hidden;
+		padding: 3px 6px;
+		background-color: #f1f2f6;
+
+		input{
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+		}
+	}
+
+	.btn_search{
+		float: right;
+		border: 2px solid #5a6478;
+		border-radius: 5px;
+		background-color: rgba(255,255,255,0.4);
+
+		&::before{
+			@include sprite($ico_search);
+
+			content: '';
+			display: block;
+			margin: 5px;
 		}
 	}
 }
@@ -89,6 +148,10 @@
 		border-radius: 10px;
 		background-color: #ced6e0;
 		box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+
+		&.highlight{
+			background-color: red;
+		}
 	}
 
 	.btn_like{

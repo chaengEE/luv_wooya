@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
-import {MusicSheet} from './../Component/MusicSheet';
+import Header from '../Component/Header';
+import {MusicSheet} from '../Component/MusicSheet';
 import database from '../database';
 
 class Write extends Component {
@@ -38,6 +39,7 @@ class Write extends Component {
             key: '',
             author : '',
             title : '',
+            content: '',
             sheetIndex : newSheetIndex,
             sheetInfo : newSheetInfo
         };
@@ -58,6 +60,7 @@ class Write extends Component {
                     key : noteID,
                     author : newNote.author,
                     title : newNote.title,
+                    content : newNote.content,
                     sheetIndex : newNote.sheetIndex,
                     sheetInfo : newNote.sheetInfo
                 });
@@ -128,12 +131,10 @@ class Write extends Component {
         );
     }
 
-    changeAuthor = e => {
-        this.setState({author : e.target.value});
-    }
-
-    changeTitle = e =>{
-        this.setState({title : e.target.value});
+    changeData = e => {
+        let label = e.target.name;
+        this.setState({[label] : e.target.value});
+        console.log(this.state);
     }
 
     changeNoteLabel = e => {
@@ -156,7 +157,7 @@ class Write extends Component {
         let sheet_index = e.target.parentNode.parentNode.parentNode.getAttribute('row-index'),
             record_index = e.target.parentNode.parentNode.getAttribute('index'),
             noteWidth = e.target.parentNode.clientWidth,
-            offsetLeft = e.clientX - 70 - (noteWidth*record_index),
+            offsetLeft = e.pageX - 72 - (noteWidth*record_index),
             offsetTop = e.target.offsetTop + 2,
             sheetInfoList = this.state.sheetInfo;
 
@@ -217,29 +218,38 @@ class Write extends Component {
         }
 
         return(
-            <div className={classNames(styles.write_view)}>
-                <form name="writeNote" onSubmit={this.saveMusic}>
-                    <div className={classNames(styles.author)}>
-                        <label htmlFor="author">작성자</label>
-                        <span className={classNames(styles.author_area)}>
-                            <input type="text" name="author" id="author" value={this.state.author} onChange={this.changeAuthor} />
-                        </span>
-                    </div>
-                    <div className={classNames(styles.title)}>
-                        <label htmlFor="title">제목</label>
-                        <span className={classNames(styles.title_area)}>
-                            <input type="text" name="title" id="title" value={this.state.title} onChange={this.changeTitle} />
-                        </span>
-                    </div>
-                    <div className={classNames(styles.music_sheet_group)}>
-                        {totalMusicSheet}
-                        <a href="#" onClick={this.addMusicSheet} className={classNames(styles.btn_note)} role="button">타브 추가</a>
-                    </div>
-                    <div className={classNames(styles.button_area)}>
-                        <button onClick={this.clickWriteCancel} className={classNames(styles.btn_cancel)} type="button">취소</button>
-                        <button onClick={this.clickWriteSave} className={classNames(styles.btn_save)} type="submit">저장</button>
-                    </div>
-                </form>
+            <div className={classNames(styles.container)}>
+                <Header />
+                <div className={classNames(styles.write_view)}>
+                    <form name="writeNote" onSubmit={this.saveMusic}>
+                        <div className={classNames(styles.author)}>
+                            <label htmlFor="author">작성자</label>
+                            <span className={classNames(styles.author_area)}>
+                                <input type="text" name="author" id="author" value={this.state.author} onChange={this.changeData} />
+                            </span>
+                        </div>
+                        <div className={classNames(styles.title)}>
+                            <label htmlFor="title">제목</label>
+                            <span className={classNames(styles.title_area)}>
+                                <input type="text" name="title" id="title" value={this.state.title} onChange={this.changeData} />
+                            </span>
+                        </div>
+                        <div className={classNames(styles.music_sheet_group)}>
+                            {totalMusicSheet}
+                            <a href="#" onClick={this.addMusicSheet} className={classNames(styles.btn_note)} role="button">타브 추가</a>
+                        </div>
+                        <div className={classNames(styles.content)}>
+                            <label htmlFor="content">내용</label>
+                            <span className={classNames(styles.content_area)}>
+                                <textarea type="text" name="content" id="content" value={this.state.content} onChange={this.changeData} />
+                            </span>
+                        </div>
+                        <div className={classNames(styles.button_area)}>
+                            <button onClick={this.clickWriteCancel} className={classNames(styles.btn_cancel)} type="button">취소</button>
+                            <button onClick={this.clickWriteSave} className={classNames(styles.btn_save)} type="submit">저장</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

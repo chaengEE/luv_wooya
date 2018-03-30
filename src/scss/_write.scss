@@ -3,7 +3,7 @@
 	padding: 15px 15px 20px;
 	background-color: #f7f7ff;
 
-	.author,.title{
+	.author,.title,.content{
 		margin: 8px 0;
 
 		label{
@@ -15,7 +15,7 @@
 		}
 	}
 
-	.author_area,.title_area{
+	.author_area,.title_area,.content_area{
 		display: block;
 		overflow: hidden;
 		padding: 3px 6px;
@@ -24,6 +24,15 @@
 
 		input{
 			width: 100%;
+		}
+
+		textarea{
+			width: 100%;
+			min-height: 72px;
+			line-height: 24px;
+			border: 0;
+			resize: none;
+			vertical-align: top;
 		}
 
 		.code{

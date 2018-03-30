@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
+import Header from '../Component/Header';
 import {MusicSheet} from '../Component/MusicSheet';
-import Popup from '../Component/Popup'
+import Popup from '../Component/Popup';
 import database from '../database';
 
 class Detail extends Component {
@@ -86,6 +87,8 @@ class Detail extends Component {
         }
 
         return(
+        <div className={classNames(styles.container)}>
+            <Header />
             <div className={classNames(styles.detail_view)}>
                 <h2 className={classNames(styles.title)}>{this.state.note.title}</h2>
                 <div className={classNames(styles.author_info)}>
@@ -95,6 +98,11 @@ class Detail extends Component {
                 <div className={classNames(styles.music_sheet_group,styles.view_mode)}>
                     {totalCode}
                 </div>
+                 <div className={classNames(styles.content)}>
+                    <span className={classNames(styles.content_area)}>
+                        {this.state.note.content}
+                    </span>
+                </div>
                 <div className={classNames(styles.button_area)}>
                     <button onClick={this.goBack} className={classNames(styles.btn_back)} type="button">목록보기</button>
                     <button onClick={this.showPopup} className={classNames(styles.btn_delete)} type="button">삭제</button>
@@ -102,6 +110,7 @@ class Detail extends Component {
                 </div>
                 {popupBox}
             </div>
+        </div>
         );
     }
 }

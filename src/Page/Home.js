@@ -1,66 +1,90 @@
 import React, { Component } from 'react';
 import classNames from '../../node_modules/classnames/bind';
 import styles from './../scss/index.scss';
+import Header from '../Component/Header';
+import Search from '../Component/Search';
 import TabArea from '../Component/TabArea';
 import Card from '../Component/Card';
 import database from '../database';
-
-// const firebaseApp = firebase.initializeApp({
-//     apiKey:
-//     authDomain
-//     databaseURL
-//     projectId
-//     storageBucket
-//     messagingSenderId
-// });
-
-// firebaseApp.database().ref('key/data').set({
-//     'user' : 'nana',
-//     'email' : 'a@he.com'
-// })
-// key database에 data필드에 데이터를 삽입
-
-// firebaseApp.database().ref('key/data').update({
-//     'user' : 'mimi'
-// });
-// 데이터를 수정.
-// firebaseApp.database().ref('key/data').update({
-//     'age' : '45'
-// });
-// 없는 데이터를 수정하려고 하면 필드를 생성하여 추가
-// update 대신 set을 사용하면 기존에 있던 user,email은 제거
-
-// firebaseApp.database().ref('key/data').remove();
-// firebaseApp.database().ref('key/data/user').remove();
-// 필드 제거
-
-// firebaseApp.database().ref('key/data').once('value')
-// .then(function(snapshot){
-//      console.log(snapshot.val());
-// });
-// once는 파이어베이스와 연결해서 한번만 가져오고 연결을 끊어버려서 파이어베이스의 값이 바뀌어도 알 수 없다.
-// once에 'value'는 정해진 키워드이므로 확인 필요
-
-// firebaseApp.database().ref('key/data').on('value', function(snapshot){
-//      console.log(snapshot.val());
-// });
-// 데이터를 가져온 후에도 연결을 끊지 않고 유지한다.
-// 파이어베이스의 값이 바뀌면 코드에 반영해준다.
-// 성능에 영향을 미칠 수 있으니 꼭 필요한 곳에만 사용한다.
 
 class Home extends Component {
     constructor(){
         super();
         this.state = {
-            cardList : []
-        };
+            cardList : [],
+            isShowSearchbar : false,
+            searchCardKey : [],
+            userInput : ''
+        }
     }
 
-    componentWillMount(){
-        database.ref('music').on('value', (snapshot) => {
-            let newCardList = [];
+    checkUserInput = (e) => {
+        let cardKey = [];
+        this.setState({userInput : e.target.value});
 
-            snapshot.forEach((data)=>{
+        console.log(this.state.userInput.length);
+
+        if(this.state.userInput.length <= 1){
+            let emptyList = [];
+            this.setState({searchCardKey : emptyList});
+            this.showAllCard();
+        }
+        
+        database.ref('music/').on("value", (snapshot) => {
+            snapshot.forEach((data) => {
+                let key = data.key,
+                    info = data.val().note;
+
+                if(this.checkDataInclude(info.title,this.state.userInput) 
+                    || this.checkDataInclude(info.content,this.state.userInput)
+                    || this.checkDataInclude(info.author,this.state.userInput)){
+                    cardKey.push(key);
+                }
+            });
+        });
+
+        this.setState({searchCardKey : cardKey});
+        this.highlightCard();
+    }
+
+    checkDataInclude = (baseData, examData) => {
+        let regexp = new RegExp('['+examData+']+',"g");
+
+        if(baseData === undefined || baseData === null){
+            return false;
+        }
+
+        let matchData = baseData.match(regexp);
+
+        if(matchData !== null && matchData.length > 0){
+            return true;
+        }
+        return false;
+    }
+
+    highlightCard = () => {
+        let newCardList = [];
+        this.state.searchCardKey.forEach((key) => {
+            database.ref('music/' + key).on('value', (data) => {
+                let key = data.key,
+                    info = data.val().note;
+                newCardList.push(
+                    <Card key={key} 
+                        url={'/detail?'+key} 
+                        title={info.title} 
+                        author={info.author} 
+                    />
+                );
+            }); 
+        });
+        this.setState({cardList : newCardList});
+    }
+
+    showAllCard(){
+        let newCardList = [];
+
+        database.ref('music').on('value', (snapshot) => {
+            snapshot.forEach((data) => {
                 let key = data.key,
                     info = data.val().note;
                 newCardList.push(
@@ -71,22 +95,40 @@ class Home extends Component {
                     />
                 );
             });
-
             this.setState({cardList : newCardList});
         });
     }
 
+    showSearchbar = () => {
+        if(this.state.isShowSearchbar){
+            this.setState({isShowSearchbar : false});
+        }else{
+            this.setState({isShowSearchbar : true});
+        }
+
+        return false;
+    }
+
+    componentWillMount(){
+        this.showAllCard();
+    }
+
     render() {
         return (
-            <div className={classNames(styles.contents)}>
-                <TabArea tabText={['전체', '좋아요']} />
-                <div className={classNames(styles.btn_area)}>
-                    <a href="/write" className={classNames(styles.btn_write)} role="button">글쓰기</a>
-                </div>
-                <div className={classNames(styles.card_group)}>
-                    <ul className={classNames(styles.card_list)}>
-                        {this.state.cardList}
-                    </ul>
+            <div className={classNames(styles.container)}>
+                <Header />
+                <div className={classNames(styles.contents)}>
+                    <TabArea tabText={['전체', '좋아요']} />
+                    <Search isShow={this.state.isShowSearchbar} inputData={this.state.userInput} checkUserInput={this.checkUserInput} />
+                    <div className={classNames(styles.btn_area)}>
+                        <a href="#" className={classNames(styles.btn_search)} role="button" onClick={this.showSearchbar}>검색하기</a>
+                        <a href="/write" className={classNames(styles.btn_write)} role="button">글쓰기</a>
+                    </div>
+                    <div className={classNames(styles.card_group)}>
+                        <ul className={classNames(styles.card_list)}>
+                            {this.state.cardList}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );
